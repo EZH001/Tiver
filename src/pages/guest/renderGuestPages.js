@@ -1,3 +1,4 @@
+import { withBase as u } from '../../lib/paths.js';
 import { COMMUNITY_DATA, FRIEND_DATA, GAME_PROFILES } from './guestWorldData.js';
 
 function esc(s) {
@@ -30,7 +31,7 @@ function postCommentsBlock(items) {
     const av = geoAvatar(c.avatar);
     const slug = c.slug && /^[a-z0-9_-]+$/i.test(String(c.slug)) ? String(c.slug) : '';
     const profileOpen = slug
-      ? `<a href="/guest/friend/${esc(slug)}" class="guest-post-comments__profile">`
+      ? `<a href="${u(`/guest/friend/${esc(slug)}`)}" class="guest-post-comments__profile">`
       : '<span class="guest-post-comments__profile guest-post-comments__profile--nohref">';
     const profileClose = slug ? '</a>' : '</span>';
     return `<li class="guest-post-comments__item">
@@ -134,7 +135,7 @@ export function renderCommunityPage(slug) {
   return `
     <section class="guest-community-page" data-community-slug="${esc(slug)}">
       <p class="guest-community__back">
-        <a class="t-inline-link" href="/guest/groups" data-i18n="community.back">← К каталогу сообществ</a>
+        <a class="t-inline-link" href="${u('/guest/groups')}" data-i18n="community.back">← К каталогу сообществ</a>
       </p>
       <div class="guest-community-cover ${bannerClass}" role="img" aria-label=""></div>
       <div class="guest-community-sheet card">
@@ -188,7 +189,7 @@ export function renderFriendPage(slug) {
   return `
     <section class="guest-friend-page" data-friend-slug="${esc(slug)}">
       <p class="guest-community__back">
-        <a class="t-inline-link" href="/guest/friends">← К друзьям</a>
+        <a class="t-inline-link" href="${u('/guest/friends')}">← К друзьям</a>
       </p>
       <div class="guest-community-cover ${bannerClass}"></div>
       <div class="guest-community-sheet card">
@@ -223,7 +224,7 @@ export function renderFriendPage(slug) {
             <p class="copy-lead text-sm" data-i18n="friend.wall_locked">Полная стена и лента друга — после входа в аккаунт.</p>
             <p class="text-muted text-sm" data-i18n="friend.photos_hint">Галерея и личные фото — только для авторизованных.</p>
             <div class="actions-row actions-row--start">
-              <a href="/login" class="btn btn--primary btn--sm" data-i18n="guest.login">Войти</a>
+              <a href="${u('/login')}" class="btn btn--primary btn--sm" data-i18n="guest.login">Войти</a>
             </div>
           </div>
         </div>
@@ -253,7 +254,7 @@ export function renderGamePage(id) {
   return `
     <section class="guest-game-page" data-game-id="${esc(id)}">
       <p class="guest-community__back">
-        <a class="t-inline-link" href="/guest/games">← К играм</a>
+        <a class="t-inline-link" href="${u('/guest/games')}">← К играм</a>
       </p>
       <div class="guest-community-cover ${bannerClass}"></div>
       <div class="guest-community-sheet card">

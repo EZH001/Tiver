@@ -1,3 +1,4 @@
+import { withBase as u } from '../../lib/paths.js';
 import { setDocumentTitle } from '../../lib/documentTitle.js';
 import { siteFooter } from '../../components/siteFooter.js';
 import { marketingSiteHeader } from '../../layout/marketingHeader.js';
@@ -36,8 +37,8 @@ export function renderWelcome() {
 
       <section class="card card--pad-lg" aria-label="Действия">
         <div class="actions-row actions-row--stretch actions-row--start">
-          <a class="btn btn--primary btn--lg" href="/login">Войти</a>
-          <a class="btn btn--secondary btn--lg" href="/register">Регистрация</a>
+          <a class="btn btn--primary btn--lg" href="${u('/login')}">Войти</a>
+          <a class="btn btn--secondary btn--lg" href="${u('/register')}">Регистрация</a>
         </div>
       </section>
 
@@ -51,7 +52,7 @@ export function renderWelcome() {
           <p class="text-muted">Сообщения, друзья и свой профиль после входа. Очевидно, но мы всё равно написали.</p>
         </div>
         <div class="actions-row actions-row--start actions-row--hero-gap">
-          <a class="btn btn--ghost btn--lg" href="/guest/feed">Войти как гость</a>
+          <a class="btn btn--ghost btn--lg" href="${u('/guest/feed')}">Войти как гость</a>
         </div>
       </section>
 

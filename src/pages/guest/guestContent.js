@@ -1,3 +1,4 @@
+import { withBase as u } from '../../lib/paths.js';
 /**
  * Гостевой режим: разметка экранов + хуки для guestDemo.js.
  */
@@ -31,7 +32,7 @@ function guestPostCommentsHtml(items) {
     const av = guestGeoAvatarClass(c.avatar);
     const slug = c.slug && /^[a-z0-9_-]+$/i.test(String(c.slug)) ? String(c.slug) : '';
     const profileOpen = slug
-      ? `<a href="/guest/friend/${escGuest(slug)}" class="guest-post-comments__profile">`
+      ? `<a href="${u(`/guest/friend/${escGuest(slug)}`)}" class="guest-post-comments__profile">`
       : '<span class="guest-post-comments__profile guest-post-comments__profile--nohref">';
     const profileClose = slug ? '</a>' : '</span>';
     return `<li class="guest-post-comments__item">
@@ -130,7 +131,7 @@ function mockChatRow(id, name, preview, time, unread, cat = 'all', presence = ''
 function mockGroup(title, subs, tag, slug, sortTags = 'pop') {
   const c = slug ? COMMUNITY_DATA[slug] : null;
   const coverExtra = c?.bannerClass ? ` ${c.bannerClass}` : '';
-  const cellAttrs = slug ? ` data-group-href="/guest/community/${slug}" tabindex="0" role="link"` : '';
+  const cellAttrs = slug ? ` data-group-href="${u(`/guest/community/${slug}`)}" tabindex="0" role="link"` : '';
   const subBtn = c?.requestOnly
     ? `<button type="button" class="btn btn--primary btn--sm" data-sub-slug="${slug}" data-guest-request-sub>Подписаться</button>`
     : `<button type="button" class="btn btn--primary btn--sm guest-community-toggle-sub" data-sub-slug="${slug}">Подписаться</button>`;
@@ -149,10 +150,10 @@ function mockGroup(title, subs, tag, slug, sortTags = 'pop') {
 
 function mockGroupProdsoft() {
   return `
-    <div class="guest-group-cell guest-group-cell--prodsoft" data-group-href="/guest/community/prodsoft" tabindex="0" role="link" data-groups-tags="pop new">
+    <div class="guest-group-cell guest-group-cell--prodsoft" data-group-href="${u('/guest/community/prodsoft')}" tabindex="0" role="link" data-groups-tags="pop new">
       <div class="guest-group-cell__cover guest-cbanner--grid" aria-hidden="true"></div>
       <div class="guest-group-cell__body">
-        <a class="guest-group-cell__head-link" href="/guest/community/prodsoft">
+        <a class="guest-group-cell__head-link" href="${u('/guest/community/prodsoft')}">
           <span class="guest-group-cell__tag">ERP</span>
           <h3 class="guest-group-cell__title">Производственный учёт</h3>
         </a>
@@ -165,7 +166,7 @@ function mockGroupProdsoft() {
 
 function mockFriend(name, status, slug) {
   return `
-    <a class="guest-friend-row" href="/guest/friend/${slug}">
+    <a class="guest-friend-row" href="${u(`/guest/friend/${slug}`)}">
       <div class="guest-friend-row__avatar" aria-hidden="true"></div>
       <div class="guest-friend-row__info">
         <span class="guest-friend-row__name">${name}</span>
@@ -192,7 +193,7 @@ function mockGameCard(gameId) {
       goff: 'off',
     }[gameId] || 'all';
   return `
-    <a class="guest-vkplay-card" href="/guest/game/${gameId}" data-game-cat="${cat}">
+    <a class="guest-vkplay-card" href="${u(`/guest/game/${gameId}`)}" data-game-cat="${cat}">
       <div class="guest-vkplay-card__media ${cover}" aria-hidden="true"></div>
       <div class="guest-vkplay-card__body">
         <span class="guest-vkplay-card__genre">${g.tag}</span>
@@ -388,8 +389,8 @@ const PREVIEW = {
           <h2 class="guest-modal__title" id="guest-group-auth-title">Сначала авторизуйтесь</h2>
           <p class="text-secondary text-sm">Создание сообщества доступно после входа в аккаунт.</p>
           <div class="actions-row actions-row--start guest-modal__actions">
-            <a class="btn btn--primary btn--sm" href="/login">Войти</a>
-            <a class="btn btn--secondary btn--sm" href="/register">Регистрация</a>
+            <a class="btn btn--primary btn--sm" href="${u('/login')}">Войти</a>
+            <a class="btn btn--secondary btn--sm" href="${u('/register')}">Регистрация</a>
           </div>
         </div>
       </div>
@@ -583,8 +584,8 @@ export function renderGuestMain({ segment, communitySlug = '', friendSlug = '', 
         Всё выше — клиентский театр: безопасно крутить на демо и перед коллегами, пока бэкенд не проснулся.
       </p>
       <div class="actions-row actions-row--start">
-        <a class="btn btn--primary" href="/login" data-i18n="guest.login">Войти</a>
-        <a class="btn btn--secondary" href="/register" data-i18n="guest.register">Регистрация</a>
+        <a class="btn btn--primary" href="${u('/login')}" data-i18n="guest.login">Войти</a>
+        <a class="btn btn--secondary" href="${u('/register')}" data-i18n="guest.register">Регистрация</a>
       </div>
     </section>
   `;

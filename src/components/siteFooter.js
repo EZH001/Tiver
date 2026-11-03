@@ -1,3 +1,4 @@
+import { withBase as u } from '../lib/paths.js';
 import { wireFooterLocale } from '../lib/locale.js';
 
 export function siteFooter() {
@@ -6,7 +7,7 @@ export function siteFooter() {
   footer.innerHTML = `
     <div class="site-footer__wrap">
       <div class="site-footer__brand-col">
-        <a href="/welcome" class="site-footer__wordmark">Tiver</a>
+        <a href="${u('/welcome')}" class="site-footer__wordmark">Tiver</a>
         <p class="site-footer__pitch" data-i18n="footer.pitch">
           Минимализм, скорость, удобство. Соцсеть в разработке — без обещаний «скоро всё».
         </p>
@@ -14,18 +15,18 @@ export function siteFooter() {
       <div class="site-footer__cols" role="navigation" aria-label="Разделы подвала">
         <div class="site-footer__col">
           <span class="site-footer__col-title" data-i18n="footer.col_site">Сайт</span>
-          <a href="/welcome" class="site-footer__link" data-i18n="footer.home">Главная</a>
-          <a href="/login" class="site-footer__link" data-i18n="footer.login">Вход</a>
-          <a href="/register" class="site-footer__link" data-i18n="footer.register">Регистрация</a>
-          <a href="/guest/feed" class="site-footer__link" data-i18n="footer.guest">Гость</a>
+          <a href="${u('/welcome')}" class="site-footer__link" data-i18n="footer.home">Главная</a>
+          <a href="${u('/login')}" class="site-footer__link" data-i18n="footer.login">Вход</a>
+          <a href="${u('/register')}" class="site-footer__link" data-i18n="footer.register">Регистрация</a>
+          <a href="${u('/guest/feed')}" class="site-footer__link" data-i18n="footer.guest">Гость</a>
         </div>
         <div class="site-footer__col">
           <span class="site-footer__col-title" data-i18n="footer.col_archive">Архив</span>
-          <a href="/archive/welc.html" class="site-footer__link" data-i18n="footer.archive_link">HTML, 2021</a>
+          <a href="${u('/archive/welc.html')}" class="site-footer__link" data-i18n="footer.archive_link">HTML, 2021</a>
         </div>
         <div class="site-footer__col">
           <span class="site-footer__col-title" data-i18n="footer.col_legal">Юридическое</span>
-          <a href="/privacy" class="site-footer__link" data-i18n="footer.privacy">Конфиденциальность</a>
+          <a href="${u('/privacy')}" class="site-footer__link" data-i18n="footer.privacy">Конфиденциальность</a>
           <a href="#" rel="external" class="site-footer__link" data-i18n="footer.about">О проекте</a>
         </div>
       </div>

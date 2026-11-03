@@ -1,6 +1,7 @@
 import { routes } from './routes.js';
 import { getSession } from '../session/sessionStore.js';
 import { renderGuestShell } from '../pages/guest/guestShell.js';
+import { stripBase, withBase } from '../lib/paths.js';
 
 let outlet = null;
 
@@ -10,25 +11,30 @@ function findOutlet() {
 }
 
 function normalizePath(pathname) {
-  if (pathname.length > 1 && pathname.endsWith('/')) return pathname.slice(0, -1);
-  return pathname || '/';
+  const path = stripBase(pathname);
+  if (path.length > 1 && path.endsWith('/')) return path.slice(0, -1);
+  return path || '/';
+}
+
+function replacePath(logical) {
+  window.history.replaceState(null, '', withBase(logical));
 }
 
 function matchRoute(pathname) {
   const path = normalizePath(pathname);
 
   if (path === '/') {
-    window.history.replaceState(null, '', '/welcome');
+    replacePath('/welcome');
     return routes['/welcome'];
   }
 
   if (path === '/guest') {
-    window.history.replaceState(null, '', '/guest/feed');
+    replacePath('/guest/feed');
     return routes['/guest/feed'];
   }
 
   if (path === '/app') {
-    window.history.replaceState(null, '', '/app/feed');
+    replacePath('/app/feed');
     return routes['/app/feed'];
   }
 
@@ -55,7 +61,17 @@ function matchRoute(pathname) {
 }
 
 export function navigate(to, { replace = false } = {}) {
-  const next = to.startsWith('/') ? to : `/${to}`;
+  const raw = String(to || '/');
+  const hashIdx = raw.indexOf('#');
+  const queryIdx = raw.indexOf('?');
+  let cut = raw.length;
+  if (hashIdx >= 0) cut = Math.min(cut, hashIdx);
+  if (queryIdx >= 0) cut = Math.min(cut, queryIdx);
+  const pathPart = raw.slice(0, cut);
+  const suffix = raw.slice(cut);
+  let logical = pathPart.startsWith('/') ? pathPart : `/${pathPart}`;
+  logical = stripBase(logical);
+  const next = `${withBase(logical)}${suffix}`;
   if (replace) window.history.replaceState(null, '', next);
   else window.history.pushState(null, '', next);
   render();
@@ -75,7 +91,7 @@ export function render() {
   if (path.startsWith('/app')) {
     const s = getSession();
     if (s.mode !== 'user' || !s.token) {
-      window.history.replaceState(null, '', '/login');
+      replacePath('/login');
       el.replaceChildren();
       const route = routes['/login'];
       const node = route.view({ path: '/login' });

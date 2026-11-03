@@ -36,8 +36,11 @@ npm run dev
 ### Build
  
 ```bash
-# Production build
+# Production build (local / generic)
 npm run build
+
+# GitHub Pages: landing stays at /tiver/, app at /tiver/app/
+npm run build:pages
  
 # Build archive version
 npm run archive
@@ -48,4 +51,10 @@ npm run sync-archive
 # Preview production build locally
 npm run preview
 ```
+
+### GitHub Pages
+
+- Entry: https://krwg.github.io/tiver/ (`docs/index.html`)
+- App: https://krwg.github.io/tiver/app/ (`docs/app/` from `npm run build:pages`)
+- Guest UI works statically; Express auth (`npm run server`) is local-only.
  

@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:pages": "vite build && node scripts/pages-postbuild.mjs",
     "server": "node server/index.mjs",
     "archive": "node scripts/build-archive.mjs",
     "sync-archive": "node scripts/sync-archive-from-source.mjs",

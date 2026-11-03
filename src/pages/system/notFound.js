@@ -1,3 +1,4 @@
+import { withBase as u } from '../../lib/paths.js';
 import { setDocumentTitle } from '../../lib/documentTitle.js';
 
 export function renderNotFound() {
@@ -11,7 +12,7 @@ export function renderNotFound() {
         <h1 class="not-found__code" id="not-found-code">404</h1>
         <p class="not-found__message text-muted">Страница не существует или была перенесена.</p>
         <div class="actions-row not-found__actions">
-          <a class="btn btn--primary" href="/welcome">На главную</a>
+          <a class="btn btn--primary" href="${u('/welcome')}">На главную</a>
         </div>
       </section>
     </main>

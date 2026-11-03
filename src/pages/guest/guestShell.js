@@ -1,3 +1,4 @@
+import { withBase as u } from '../../lib/paths.js';
 import { setDocumentTitle } from '../../lib/documentTitle.js';
 import { getSession, clearAuth } from '../../session/sessionStore.js';
 import { siteFooter } from '../../components/siteFooter.js';
@@ -42,24 +43,24 @@ export function renderGuestShell({ segment, communitySlug = '', friendSlug = '',
         ? 'guest-nav__link--active'
         : '';
     const label = GUEST_SEGMENT_META[id].label;
-    return `<a class="guest-nav__link ${active}" href="${href}">${label}</a>`;
+    return `<a class="guest-nav__link ${active}" href="${u(href)}">${label}</a>`;
   }).join('');
 
   const accountBlock =
     session.mode === 'user'
       ? `
-          <a class="guest-user-menu__item" href="/app/profile">Личный кабинет</a>
+          <a class="guest-user-menu__item" href="${u('/app/profile')}">Личный кабинет</a>
           <a class="guest-user-menu__item" href="#" data-logout>Выйти из аккаунта</a>
         `
       : `
-          <a class="guest-user-menu__item" href="/login">Войти в аккаунт</a>
-          <a class="guest-user-menu__item" href="/register">Зарегистрироваться</a>
+          <a class="guest-user-menu__item" href="${u('/login')}">Войти в аккаунт</a>
+          <a class="guest-user-menu__item" href="${u('/register')}">Зарегистрироваться</a>
         `;
 
   root.innerHTML = `
     <header class="guest-topbar" role="banner">
       <div class="guest-topbar__brand">
-        <a href="/welcome" class="guest-topbar__logo">Tiver</a>
+        <a href="${u('/welcome')}" class="guest-topbar__logo">Tiver</a>
         <span class="guest-badge">${session.mode === 'user' ? 'Аккаунт' : 'Гость'}</span>
       </div>
       <nav class="guest-nav" aria-label="Разделы">
@@ -72,9 +73,9 @@ export function renderGuestShell({ segment, communitySlug = '', friendSlug = '',
         </button>
         <div class="guest-user-menu__panel" data-user-menu-panel hidden>
           ${accountBlock}
-          <a class="guest-user-menu__item" href="/guest/settings">Настройки</a>
+          <a class="guest-user-menu__item" href="${u('/guest/settings')}">Настройки</a>
           <span class="guest-user-menu__item guest-user-menu__item--muted">Помощь</span>
-          <a class="guest-user-menu__item" href="/welcome">На главную</a>
+          <a class="guest-user-menu__item" href="${u('/welcome')}">На главную</a>
         </div>
       </div>
     </header>

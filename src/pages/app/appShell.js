@@ -1,3 +1,4 @@
+import { withBase as u } from '../../lib/paths.js';
 import { setDocumentTitle } from '../../lib/documentTitle.js';
 import { getSession, clearAuth } from '../../session/sessionStore.js';
 import { siteFooter } from '../../components/siteFooter.js';
@@ -39,7 +40,7 @@ export function renderAppShell({ section }) {
 
   const navHtml = NAV.map(({ id, href, label }) => {
     const active = id === section ? 'app-topbar__link--active' : '';
-    return `<a class="app-topbar__link ${active}" href="${href}">${label}</a>`;
+    return `<a class="app-topbar__link ${active}" href="${u(href)}">${label}</a>`;
   }).join('');
 
   const inner =
@@ -67,12 +68,12 @@ export function renderAppShell({ section }) {
   root.innerHTML = `
     <header class="app-topbar" role="banner">
       <div class="app-topbar__brand">
-        <a href="/welcome" class="app-topbar__logo">Tiver</a>
+        <a href="${u('/welcome')}" class="app-topbar__logo">Tiver</a>
         <span class="guest-badge">${escapeAttr(session.user?.email || '')}</span>
       </div>
       <nav class="app-topbar__nav" aria-label="Разделы">
         ${navHtml}
-        <a class="app-topbar__link" href="/guest/feed">Гость</a>
+        <a class="app-topbar__link" href="${u('/guest/feed')}">Гость</a>
         <a class="app-topbar__link" href="#" data-app-logout>Выйти</a>
       </nav>
     </header>

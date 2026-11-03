@@ -1,7 +1,12 @@
 import { defineConfig } from 'vite';
 
-export default defineConfig({
+export default defineConfig(({ command }) => ({
   appType: 'spa',
+  base: command === 'build' ? '/tiver/app/' : '/',
+  build: {
+    outDir: 'docs/app',
+    emptyOutDir: true,
+  },
   server: {
     port: 5173,
     proxy: {
@@ -19,4 +24,4 @@ export default defineConfig({
       },
     },
   },
-});
+}));

@@ -1,3 +1,4 @@
+import { withBase as u } from '../../lib/paths.js';
 /**
  * Интерактивные демо в гостевом режиме: лента, чаты, 1С, бот.
  */
@@ -586,7 +587,7 @@ function wireGuestPostComments(scope) {
       wrap?.querySelector('[data-guest-comments-placeholder]')?.remove();
       const li = document.createElement('li');
       li.className = 'guest-post-comments__item';
-      li.innerHTML = `<a href="/guest/friend/you" class="guest-post-comments__profile"><span class="guest-geo-avatar guest-geo-avatar--guest" aria-hidden="true"></span><span class="guest-post-comments__stack"><span class="guest-post-comments__who">Вы</span><span class="guest-post-comments__text">${escapeHtml(raw)}</span></span></a>`;
+      li.innerHTML = `<a href="${u('/guest/friend/you')}" class="guest-post-comments__profile"><span class="guest-geo-avatar guest-geo-avatar--guest" aria-hidden="true"></span><span class="guest-post-comments__stack"><span class="guest-post-comments__who">Вы</span><span class="guest-post-comments__text">${escapeHtml(raw)}</span></span></a>`;
       list.appendChild(li);
       if (inp) inp.value = '';
       const cbtn = post?.querySelector('[data-guest-comment]');

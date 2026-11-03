@@ -1,3 +1,4 @@
+import { withBase as u } from '../../lib/paths.js';
 import { setDocumentTitle } from '../../lib/documentTitle.js';
 import privacyBody from '../../content/legal/privacy-body.html?raw';
 import { siteFooter } from '../../components/siteFooter.js';
@@ -18,7 +19,7 @@ export function renderPrivacy() {
           Документ сохраняет юридическую базу проекта. В продукте Tiver вы получаете предсказуемые настройки приватности — без «тёмных паттернов», к которым приучили крупные сети.
         </p>
         <div class="actions-row actions-row--start">
-          <a class="btn btn--ghost btn--sm" href="/welcome">Назад</a>
+          <a class="btn btn--ghost btn--sm" href="${u('/welcome')}">Назад</a>
         </div>
       </header>
 

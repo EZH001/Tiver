@@ -1,3 +1,4 @@
+import { withBase as u } from '../../lib/paths.js';
 import { setDocumentTitle } from '../../lib/documentTitle.js';
 import { siteFooter } from '../../components/siteFooter.js';
 import { marketingSiteHeader } from '../../layout/marketingHeader.js';
@@ -34,12 +35,12 @@ export function renderRegister() {
         </label>
         <label class="choice">
           <input type="checkbox" name="terms" required />
-          <span>Я принимаю <a href="/privacy" class="t-inline-link">политику конфиденциальности</a></span>
+          <span>Я принимаю <a href="${u('/privacy')}" class="t-inline-link">политику конфиденциальности</a></span>
         </label>
         <button class="btn btn--primary btn--block" type="submit">Создать аккаунт</button>
         <div class="actions-row actions-row--start actions-row--tight">
-          <a class="btn btn--ghost btn--sm" href="/welcome">Назад</a>
-          <a class="btn btn--secondary btn--sm" href="/login">Уже есть аккаунт</a>
+          <a class="btn btn--ghost btn--sm" href="${u('/welcome')}">Назад</a>
+          <a class="btn btn--secondary btn--sm" href="${u('/login')}">Уже есть аккаунт</a>
         </div>
       </form>
     </main>

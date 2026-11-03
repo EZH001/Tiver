@@ -1,4 +1,5 @@
 import { navigate } from './router.js';
+import { stripBase } from '../lib/paths.js';
 
 function isModifiedClick(event) {
   return event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0;
@@ -26,10 +27,12 @@ export function initLinkInterceptor() {
 
     if (url.origin !== window.location.origin) return;
 
-    // Статические HTML в public/archive — полная навигация браузером, не SPA
-    if (url.pathname.startsWith('/archive/')) return;
+    const logical = stripBase(url.pathname);
+
+    // Static HTML under public/archive — full browser navigation, not SPA
+    if (logical.startsWith('/archive/') || /\.html$/i.test(logical)) return;
 
     event.preventDefault();
-    navigate(`${url.pathname}${url.search}${url.hash}`);
+    navigate(`${logical}${url.search}${url.hash}`);
   });
 }
