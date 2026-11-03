@@ -1,3 +1,13 @@
+html.tiver {
+  overflow-x: clip;
+}
+
+html.tiver body {
+  overflow-x: clip;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 .page--marketing {
   padding-left: max(var(--gutter-x), env(safe-area-inset-left, 0px));
   padding-right: max(var(--gutter-x), env(safe-area-inset-right, 0px));
@@ -19,6 +29,7 @@
 @media (max-width: 900px) {
   :root {
     --container: min(100%, 100% - 2 * var(--gutter-x));
+    --gutter-x: clamp(0.85rem, 4.2vw, 1.25rem);
   }
 
   .page--guest {
@@ -28,28 +39,60 @@
   .guest-topbar {
     border-radius: 0;
     padding-top: max(var(--space-3), env(safe-area-inset-top, 0px));
+    padding-left: max(var(--space-4), env(safe-area-inset-left, 0px));
+    padding-right: max(var(--space-4), env(safe-area-inset-right, 0px));
   }
 
-  .guest-nav__link {
-    flex: 0 0 auto;
+  .page--guest .guest-main {
+    padding-left: max(var(--space-4), env(safe-area-inset-left, 0px));
+    padding-right: max(var(--space-4), env(safe-area-inset-right, 0px));
+  }
+
+  .guest-badge {
+    display: none;
+  }
+
+  .site-footer__cols {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .btn {
+    min-height: 2.75rem;
+  }
+
+  .input,
+  .field .input,
+  textarea.input {
+    font-size: 16px;
   }
 }
 
 @media (max-width: 600px) {
+  body {
+    font-size: 12px;
+  }
+
   .stack--lg {
     gap: var(--space-8);
   }
 
   .card--pad-lg {
-    padding: var(--space-6);
-  }
-
-  .card--pad-md {
     padding: var(--space-5);
   }
 
+  .card--pad-md {
+    padding: var(--space-4);
+  }
+
   .hero__title {
-    font-size: clamp(24px, 7vw, 32px);
+    font-size: clamp(20px, 6.5vw, 28px);
+    line-height: 1.35;
+  }
+
+  .hero__subtitle,
+  .copy-block .text-secondary {
+    font-size: 13px;
+    line-height: 1.5;
   }
 
   .actions-row--stretch {
@@ -91,22 +134,60 @@
   .legal__body h3 {
     margin-top: var(--space-6);
   }
+
+  .site-footer__cols {
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+  }
+
+  .site-footer__pitch {
+    max-width: none;
+    font-size: 13px;
+  }
+
+  .site-footer__link {
+    min-height: 2.25rem;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .guest-friends-toolbar {
+    grid-template-columns: 1fr;
+  }
+
+  .guest-feed-composer,
+  .guest-feed-card,
+  .guest-group-cell,
+  .guest-friend-row,
+  .guest-vkplay-card {
+    border-radius: 0;
+  }
+
+  .guest-user-menu__item {
+    min-height: 2.75rem;
+    display: flex;
+    align-items: center;
+  }
 }
 
 @media (max-width: 380px) {
   .site-logo {
     min-width: auto;
-    width: 100%;
-    max-width: 12rem;
+    width: auto;
+    max-width: 10rem;
   }
 
   .guest-nav__link {
     padding-inline: 10px;
     font-size: 12px;
   }
+
+  .guest-topbar__logo,
+  .app-topbar__logo {
+    font-size: 10px;
+  }
 }
 
-/* Широкий экран: «остров» топбара гостя — спокойный каркас как у крупных маркетинговых сайтов */
 @media (min-width: 1060px) {
   .guest-topbar {
     max-width: var(--container-guest-wide);
@@ -122,10 +203,23 @@
   }
 }
 
-/* Горизонтальный скролл табов с мягким затуханием по краям */
 @media (max-width: 720px) {
-  .guest-nav {
-    mask-image: linear-gradient(90deg, transparent, #000 12px, #000 calc(100% - 12px), transparent);
-    -webkit-mask-image: linear-gradient(90deg, transparent, #000 12px, #000 calc(100% - 12px), transparent);
+  .guest-nav,
+  .app-topbar__nav {
+    mask-image: linear-gradient(90deg, transparent, #000 10px, #000 calc(100% - 10px), transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 10px, #000 calc(100% - 10px), transparent);
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .guest-nav__link:hover,
+  .app-topbar__link:hover,
+  .site-footer__link:hover {
+    background: transparent;
+  }
+
+  a:active,
+  button:active {
+    opacity: 0.88;
   }
 }

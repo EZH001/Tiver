@@ -36,6 +36,16 @@
   }
 }
 
+@media (max-width: 560px) {
+  .guest-dash__side {
+    grid-template-columns: 1fr;
+  }
+
+  .guest-hero--compact {
+    padding: var(--space-4);
+  }
+}
+
 .guest-hero--compact {
   padding: var(--space-5) var(--space-6);
 }
